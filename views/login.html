@@ -13,13 +13,16 @@
             <img src="./assets/images/bmw.png" alt="" height="200px" width="200px">
         </div>
         <!-- sign in form -->
-         <form action="" method="POST" class="form-login">
+         <form id="login-form" class="form-login">
             <h1>Sign in</h1>
-            <input type="email" name="email" required>
-            <input type="password" name="password" required>
+            <input type="email" id="email" name="email" placeholder="email" required>
+            <input type="password" id="password" name="password" placeholder="password" required>
             <button type="submit">Sign in</button>
             <p style="text-align: center; font-weight: bold;">Don't have an account? <a href="/signup" class="sign-up">Sign up</a></p>
          </form>
+         <!-- Display messages dynamically -->
+         <p id="message" style="text-align: center; font-weight: bold;"></p>
     </div>
+    <script src="./assets/scripts/auth.js"></script>
 </body>
 </html>

@@ -3,6 +3,7 @@ package routes
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/ichami630/Go-JWT-Auth/controller"
+	"github.com/ichami630/Go-JWT-Auth/middleware"
 )
 
 func Router() {
@@ -22,11 +23,13 @@ func Router() {
 		c.HTML(200, "signup.html", nil)
 	})
 
-	server.GET("/admin", func(c *gin.Context) {
+	server.GET("/admin", middleware.Auth, func(c *gin.Context) {
 		c.HTML(200, "dashboard.html", nil)
 	})
 
 	server.POST("/signup", controller.SignUp)
+
+	server.POST("/login", controller.Login)
 
 	//group admin route
 	// admin := server.Group("/admin")
@@ -36,5 +39,5 @@ func Router() {
 	// 	})
 	// }
 
-	server.Run(":8080") //listening on port 8080
+	server.Run(":8000") //listening on port 8080
 }

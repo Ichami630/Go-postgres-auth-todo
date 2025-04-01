@@ -13,15 +13,17 @@
             <img src="./assets/images/bmw.png" alt="" height="200px" width="200px">
         </div>
          <!-- sign up form -->
-         <form action="/signup" method="POST" class="form-signup">
+         <form id="signup-form" class="form-signup">
             <h1>Sign up</h1>
-            <input type="email" name="email" placeholder="email" required>
-            <input type="password" name="password" placeholder="password">
-            <input type="password" name="cpassword" placeholder="confirm password" required>
+            <input type="email" id="email" name="email" placeholder="email" required>
+            <input type="password" id="password" name="password" placeholder="password">
+            <input type="password" id="cpassword" name="cpassword" placeholder="confirm password" required>
             <button type="submit">Sign up</button>
             <p style="text-align: center; font-weight: bold;">Already have an account? <a href="/login" class="login">Sign in</a></p>
-            <p>{{.msg}}</p>
+            <!-- Display messages dynamically -->
+            <p id="message" style="text-align: center; font-weight: bold;"></p>
          </form>
     </div>
+    <script src="./assets/scripts/auth.js"></script>
 </body>
 </html>
