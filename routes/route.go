@@ -19,5 +19,17 @@ func Router() {
 		c.HTML(200, "signup.html", nil)
 	})
 
+	server.GET("/admin", func(c *gin.Context) {
+		c.HTML(200, "dashboard.html", nil)
+	})
+
+	//group admin route
+	// admin := server.Group("/admin")
+	// {
+	// 	admin.GET("/", func(c *gin.Context) {
+	// 		c.HTML(200, "dashboard.html", nil)
+	// 	})
+	// }
+
 	server.Run(":8080") //listening on port 8080
 }

@@ -45,7 +45,7 @@
     padding: 10px 4px;
     display: flex;
 }
-.signup-btn,button[type="submit"]{
+.signup-btn,.form-login > [type="submit"],.form-signup > [type="submit"]{
     width: 100%;
     padding: 10px 4px;
     text-align: center;
@@ -69,3 +69,76 @@
         width: 250px;
     }
 }
+
+/* admin style */
+.grid-container{
+    margin: 10px;
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    gap: 10px;
+    height: 96vh;
+}
+.menu-aside{
+    background: #d3d1d1;
+    grid-column: span 3;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.top-menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+.aside-form{
+    min-width: 100%;
+    border: 1px solid #080808;
+    border-radius: 25px;
+    padding-left: 2px;
+    max-height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 0px;
+    background: #FFFF;
+}
+.aside-form form > input,.aside-form form > button{
+    border: none;
+    background: #FFFF;
+    font-weight: bold;
+    font-size: 14px;
+}
+.aside-form > form{
+    display: flex;
+    align-items: center;
+}
+.aside-form form > input:focus{
+    outline: none;
+    background: #FFFF;
+}
+
+.dashboard-content{
+    background: #be6060;
+    grid-column: span 9;
+    padding: 10px;
+}
+@media(max-width: 574px){
+    .menu-aside{
+        grid-column: span 1;
+        background: #FFFF;
+    }
+    .top-menu-text,.aside-content{
+        display: none;
+    }
+    .dashboard-content{
+        grid-column: span 11;
+    }
+    .grid-container{
+        margin: 0px;
+    }
+}
+
