@@ -1,6 +1,9 @@
 package routes
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/ichami630/Go-JWT-Auth/controller"
+)
 
 func Router() {
 	server := gin.Default() //create a gin router with default middleware(logger and recovery)
@@ -22,6 +25,8 @@ func Router() {
 	server.GET("/admin", func(c *gin.Context) {
 		c.HTML(200, "dashboard.html", nil)
 	})
+
+	server.POST("/signup", controller.SignUp)
 
 	//group admin route
 	// admin := server.Group("/admin")

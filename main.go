@@ -12,6 +12,9 @@ func main() {
 	//db connection
 	config.Connection()
 
+	//run our migrations
+	config.DbMigrations()
+
 	//start the server
 	routes.Router()
 }
