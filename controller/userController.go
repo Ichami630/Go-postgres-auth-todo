@@ -18,6 +18,7 @@ func SignUp(c *gin.Context) {
 		Email           string `form:"email" json:"email" binding:"required"`
 		Password        string `form:"password" json:"password" binding:"required"`
 		ConfirmPassword string `form:"cpassword" json:"cpassword" binding:"required"`
+		CSRFToken       string `form:"csrf_token" json:"csrf_token" binding:"required"`
 	}
 
 	if err := c.ShouldBind(&body); err != nil {

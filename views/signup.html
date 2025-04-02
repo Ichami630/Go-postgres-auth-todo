@@ -15,6 +15,7 @@
          <!-- sign up form -->
          <form id="signup-form" class="form-signup">
             <h1>Sign up</h1>
+            <input type="hidden" name="csrf_token" id="csrf_token" value="{{.csrfToken}}" required>
             <input type="email" id="email" name="email" placeholder="email" required>
             <input type="password" id="password" name="password" placeholder="password">
             <input type="password" id="cpassword" name="cpassword" placeholder="confirm password" required>

@@ -15,12 +15,16 @@ function signup(){
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
         const cpassword = document.getElementById("cpassword").value;
+        const csrf_token = document.getElementById("csrf_token").value;
         const message = document.getElementById("message");
     
         // Send data to backend using Fetch API
         const response = await fetch("/signup", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json",
+                "X-CSRF-Token": csrf_token, 
+            },
             body: JSON.stringify({ email, password, cpassword })
         });
     

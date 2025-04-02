@@ -15,7 +15,7 @@ func Auth(c *gin.Context) {
 	// Get the cookie from the request
 	tokenString, err := c.Cookie("Authorization")
 	if err != nil {
-		c.Redirect(http.StatusFound, "/login") // Redirect to login page
+		c.Redirect(301, "/login") // Redirect to login page
 		c.Abort()
 		return
 	}
@@ -25,7 +25,7 @@ func Auth(c *gin.Context) {
 		return []byte(os.Getenv("SECRET")), nil
 	}, jwt.WithValidMethods([]string{jwt.SigningMethodHS256.Alg()}))
 	if err != nil {
-		c.Redirect(http.StatusFound, "/login") // Redirect to login page
+		c.Redirect(301, "/login") // Redirect to login page
 		c.Abort()
 		return
 	}
@@ -40,7 +40,7 @@ func Auth(c *gin.Context) {
 
 	// Check expiration
 	if float64(time.Now().Unix()) > claims["exp"].(float64) {
-		c.Redirect(http.StatusFound, "/login")
+		c.Redirect(301, "/login")
 		c.Abort()
 		return
 	}
@@ -49,7 +49,7 @@ func Auth(c *gin.Context) {
 	var user model.User
 	config.Conn.First(&user, claims["sub"])
 	if user.ID == 0 {
-		c.Redirect(http.StatusFound, "/login")
+		c.Redirect(301, "/login")
 		c.Abort()
 		return
 	}
