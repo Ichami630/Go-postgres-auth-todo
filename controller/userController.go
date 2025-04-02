@@ -18,7 +18,7 @@ func SignUp(c *gin.Context) {
 		Email           string `form:"email" json:"email" binding:"required"`
 		Password        string `form:"password" json:"password" binding:"required"`
 		ConfirmPassword string `form:"cpassword" json:"cpassword" binding:"required"`
-		CSRFToken       string `form:"csrf_token" json:"csrf_token" binding:"required"`
+		// CSRFToken       string `form:"csrf_token" json:"csrf_token" binding:"required"`
 	}
 
 	if err := c.ShouldBind(&body); err != nil {
@@ -55,6 +55,7 @@ func Login(c *gin.Context) {
 	var body struct {
 		Email    string `form:"email" json:"email" binding:"required"`
 		Password string `form:"password" json:"password" binding:"required"`
+		// CSRFToken string `form:"csrf_token" json:"csrf_token" binding:"required"`
 	}
 
 	if c.Bind(&body) != nil {
@@ -101,7 +102,7 @@ func Login(c *gin.Context) {
 
 	//send the token
 	c.SetSameSite(http.SameSiteLaxMode)
-	c.SetCookie("Authorization", tokenString, 3600*24*30, "", "", false, true)
+	c.SetCookie("Authorization", tokenString, 3600*24*30, "/", "", false, true)
 	c.JSON(http.StatusOK, gin.H{
 		"success": tokenString,
 	})

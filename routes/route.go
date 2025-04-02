@@ -27,31 +27,32 @@ func Router() {
 
 	server.Static("./assets", "./views/assets") //serve static files like css,js,images
 
-	server.LoadHTMLGlob("views/**/*.html") //load html files from the views folder with support for nested folders
+	server.LoadHTMLGlob("views/*.html") //load html files from the views folder with support for nested folders
 
 	server.GET("/", func(c *gin.Context) {
 		c.HTML(200, "index.html", gin.H{"csrfToken": csrf.GetToken(c)})
 	})
 	server.GET("/login", func(c *gin.Context) {
-		c.HTML(200, "login.html", nil)
+		c.HTML(200, "login.html", gin.H{"csrfToken": csrf.GetToken(c)})
 	})
 	server.GET("/signup", func(c *gin.Context) {
 		c.HTML(200, "signup.html", gin.H{"csrfToken": csrf.GetToken(c)})
 	})
 
 	server.GET("/admin", middleware.Auth, func(c *gin.Context) {
-		c.HTML(200, "dashboard.html", nil)
+		c.HTML(200, "dashboard.html", gin.H{"csrfToken": csrf.GetToken(c)})
 	})
 
 	server.POST("/signup", controller.SignUp)
 
 	server.POST("/login", controller.Login)
 
-	//group admin route
+	// group admin route
 	// admin := server.Group("/admin")
+	// admin.Use(middleware.Auth)
 	// {
 	// 	admin.GET("/", func(c *gin.Context) {
-	// 		c.HTML(200, "dashboard.html", nil)
+	// 		c.HTML(200, "/dashboard.html", nil)
 	// 	})
 	// }
 

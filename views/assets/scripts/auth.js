@@ -51,17 +51,18 @@ function login(){
         //send data to backend fetch api
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
+        const csrf_token = document.getElementById("csrf_token").value;
 
         const response = await fetch("/login", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json",
+                "X-CSRF-Token": csrf_token, 
+            },
             body: JSON.stringify({email,password})
         })
         const result = await response.json(); // Parse JSON response
-        if (response.ok) {
-            message.style.color = "green";
-            message.innerText = result.success;
-        } else {
+        if (!response.ok) {
             message.style.color = "red";
             message.innerText = result.error;
         }

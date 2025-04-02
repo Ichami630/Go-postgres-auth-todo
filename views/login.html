@@ -15,6 +15,7 @@
         <!-- sign in form -->
          <form id="login-form" class="form-login">
             <h1>Sign in</h1>
+            <input type="hidden" name="csrf_token" id="csrf_token" value="{{.csrfToken}}" required>
             <input type="email" id="email" name="email" placeholder="email" required>
             <input type="password" id="password" name="password" placeholder="password" required>
             <button type="submit">Sign in</button>

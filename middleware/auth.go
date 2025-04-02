@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"fmt"
 	"net/http"
 	"os"
 	"time"
@@ -15,6 +16,7 @@ func Auth(c *gin.Context) {
 	// Get the cookie from the request
 	tokenString, err := c.Cookie("Authorization")
 	if err != nil {
+		fmt.Println("error getting cookie", err)
 		c.Redirect(301, "/login") // Redirect to login page
 		c.Abort()
 		return
@@ -23,8 +25,9 @@ func Auth(c *gin.Context) {
 	// Decode and validate token
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		return []byte(os.Getenv("SECRET")), nil
-	}, jwt.WithValidMethods([]string{jwt.SigningMethodHS256.Alg()}))
+	})
 	if err != nil {
+		fmt.Println("Error decoding cookie", err)
 		c.Redirect(301, "/login") // Redirect to login page
 		c.Abort()
 		return
@@ -33,6 +36,7 @@ func Auth(c *gin.Context) {
 	// Extract claims
 	claims, ok := token.Claims.(jwt.MapClaims)
 	if !ok || !token.Valid {
+		fmt.Println("error extracting claims")
 		c.Redirect(http.StatusFound, "/login")
 		c.Abort()
 		return
